@@ -1,0 +1,197 @@
+.interests-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.interest-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.interest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.interest-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.interest-grid .form-field {
+  margin-bottom: 0;
+}
+
+.interest-grid .form-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.achievement-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.achievement-item input {
+  flex: 1;
+}
+
+.add-interest {
+  align-self: center;
+  margin-top: 1rem;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Select Styles */
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background-color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Textarea Styles */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .interest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interest-item {
+    padding: 1rem;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+
+  .achievement-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .interest-item {
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  input[type="checkbox"] {
+    border: 2px solid ButtonText;
+  }
+
+  input[type="checkbox"]:checked {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  select,
+  textarea {
+    border: 2px solid ButtonText;
+  }
+
+  select:focus,
+  textarea:focus {
+    border-color: Highlight;
+    outline: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .interest-item,
+  .btn-icon {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .interest-item {
+    break-inside: avoid;
+    border: none;
+    background: none;
+  }
+
+  .btn-icon,
+  .add-interest,
+  .btn-secondary {
+    display: none;
+  }
+
+  .interest-grid {
+    display: block;
+  }
+
+  .interest-grid .form-field {
+    margin-bottom: 0.5rem;
+  }
+
+  .achievement-item {
+    break-inside: avoid;
+  }
+
+  textarea {
+    border: none;
+    background: none;
+  }
+} 

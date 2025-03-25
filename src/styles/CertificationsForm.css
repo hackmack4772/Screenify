@@ -1,0 +1,212 @@
+.certifications-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.certification-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.certification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.certification-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.certification-grid .form-field {
+  margin-bottom: 0;
+}
+
+.certification-grid .form-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.skill-item input {
+  flex: 1;
+}
+
+.add-certification {
+  align-self: center;
+  margin-top: 1rem;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Date Input Styles */
+input[type="date"] {
+  font-family: inherit;
+  color: #374151;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+input[type="date"]:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* URL Input Styles */
+input[type="url"] {
+  letter-spacing: 0.5px;
+}
+
+/* Textarea Styles */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .certification-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certification-item {
+    padding: 1rem;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+
+  .skill-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .certification-item {
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  input[type="checkbox"] {
+    border: 2px solid ButtonText;
+  }
+
+  input[type="checkbox"]:checked {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  input[type="date"]:disabled {
+    background: GrayText;
+  }
+
+  textarea {
+    border: 2px solid ButtonText;
+  }
+
+  textarea:focus {
+    border-color: Highlight;
+    outline: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .certification-item,
+  .btn-icon,
+  input[type="checkbox"],
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .certification-item {
+    break-inside: avoid;
+    border: none;
+    background: none;
+  }
+
+  .btn-icon,
+  .add-certification,
+  .btn-secondary {
+    display: none;
+  }
+
+  .certification-grid {
+    display: block;
+  }
+
+  .certification-grid .form-field {
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-item {
+    break-inside: avoid;
+  }
+
+  textarea {
+    border: none;
+    background: none;
+  }
+} 

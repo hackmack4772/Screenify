@@ -1,0 +1,189 @@
+.base-section-form {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.form-error {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+.form-content {
+  margin-bottom: 2rem;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #1976d2;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+/* Form Field Styles */
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.form-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-field .error-message {
+  margin-top: 0.25rem;
+  color: #dc2626;
+  font-size: 0.75rem;
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .base-section-form {
+    border: 2px solid ButtonText;
+  }
+
+  .form-error {
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .btn {
+    border: 2px solid ButtonText;
+  }
+
+  .btn-primary {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .btn-secondary {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    border: 2px solid ButtonText;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: Highlight;
+    box-shadow: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .base-section-form {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .form-footer {
+    display: none;
+  }
+} 

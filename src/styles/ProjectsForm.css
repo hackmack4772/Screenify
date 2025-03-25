@@ -1,0 +1,217 @@
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.project-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-grid .form-field {
+  margin-bottom: 0;
+}
+
+.project-grid .form-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.technologies-list,
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.technology-item,
+.achievement-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.technology-item input,
+.achievement-item input {
+  flex: 1;
+}
+
+.add-project {
+  align-self: center;
+  margin-top: 1rem;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Date Input Styles */
+input[type="date"] {
+  font-family: inherit;
+  color: #374151;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+input[type="date"]:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* URL Input Styles */
+input[type="url"] {
+  letter-spacing: 0.5px;
+}
+
+/* Textarea Styles */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-item {
+    padding: 1rem;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+
+  .technology-item,
+  .achievement-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .project-item {
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  input[type="checkbox"] {
+    border: 2px solid ButtonText;
+  }
+
+  input[type="checkbox"]:checked {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  input[type="date"]:disabled {
+    background: GrayText;
+  }
+
+  textarea {
+    border: 2px solid ButtonText;
+  }
+
+  textarea:focus {
+    border-color: Highlight;
+    outline: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .project-item,
+  .btn-icon,
+  input[type="checkbox"],
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .project-item {
+    break-inside: avoid;
+    border: none;
+    background: none;
+  }
+
+  .btn-icon,
+  .add-project,
+  .btn-secondary {
+    display: none;
+  }
+
+  .project-grid {
+    display: block;
+  }
+
+  .project-grid .form-field {
+    margin-bottom: 0.5rem;
+  }
+
+  .technology-item,
+  .achievement-item {
+    break-inside: avoid;
+  }
+
+  textarea {
+    border: none;
+    background: none;
+  }
+} 

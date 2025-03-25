@@ -1,0 +1,247 @@
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skill-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #dee2e6;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.skill-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-grid .form-field {
+  margin-bottom: 0;
+}
+
+.skill-grid .form-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.keywords-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.keyword-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.keyword-item input {
+  flex: 1;
+}
+
+.add-skill {
+  align-self: center;
+  margin-top: 1rem;
+}
+
+/* Select Styles */
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background-color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Number Input Styles */
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #374151;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Textarea Styles */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Proficiency Level Bar */
+.proficiency-indicator {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.level-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.level-bar.beginner {
+  width: 25%;
+  background: #ef4444;
+}
+
+.level-bar.intermediate {
+  width: 50%;
+  background: #f59e0b;
+}
+
+.level-bar.advanced {
+  width: 75%;
+  background: #10b981;
+}
+
+.level-bar.expert {
+  width: 100%;
+  background: #3b82f6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-item {
+    padding: 1rem;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+
+  .keyword-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .skill-item {
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .btn-icon:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  select,
+  input[type="number"],
+  textarea {
+    border: 2px solid ButtonText;
+  }
+
+  select:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    border-color: Highlight;
+    outline: none;
+  }
+
+  .proficiency-indicator {
+    background: ButtonText;
+  }
+
+  .level-bar {
+    background: Highlight;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .skill-item,
+  .btn-icon,
+  .level-bar {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .skill-item {
+    break-inside: avoid;
+    border: none;
+    background: none;
+  }
+
+  .btn-icon,
+  .add-skill,
+  .btn-secondary {
+    display: none;
+  }
+
+  .skill-grid {
+    display: block;
+  }
+
+  .skill-grid .form-field {
+    margin-bottom: 0.5rem;
+  }
+
+  .keyword-item {
+    break-inside: avoid;
+  }
+
+  textarea {
+    border: none;
+    background: none;
+  }
+
+  .proficiency-indicator {
+    display: none;
+  }
+} 
