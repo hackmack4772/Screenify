@@ -25,6 +25,12 @@ const Navigation = () => {
           Upload Resume
         </Link>
         <Link 
+          to="/builder" 
+          className={`nav-link ${isActive('/builder') ? 'active' : ''}`}
+        >
+          Create Resume
+        </Link>
+        <Link 
           to="/analysis" 
           className={`nav-link ${isActive('/analysis') ? 'active' : ''}`}
         >
@@ -62,6 +68,12 @@ const Navigation = () => {
             className={`mobile-link ${isActive('/upload') ? 'active' : ''}`}
           >
             Upload Resume
+          </Link>
+          <Link 
+            to="/builder" 
+            className={`mobile-link ${isActive('/builder') ? 'active' : ''}`}
+          >
+            Create Resume
           </Link>
           <Link 
             to="/analysis" 

@@ -1,6 +1,10 @@
 import axios from 'axios';
+import * as pdfjsLib from 'pdfjs-dist';
 
-const DEEPSEEK_API_KEY = process.env.VITE_DEEPSEEK_API_KEY;
+// Set the worker source
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+
+const DEEPSEEK_API_KEY = "";
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1';
 
 export const resumeService = {

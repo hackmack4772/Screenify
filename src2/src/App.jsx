@@ -1,14 +1,11 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import Home from './pages/Home'
 import About from './pages/About'
-import Dashboard from './components/Dashboard'
+import Dashboard from './pages/Dashboard'
 import ResumeUpload from './components/ResumeUpload'
 import ResumeAnalysis from './components/ResumeAnalysis'
 import InterviewChat from './components/InterviewChat'
-import ResumeBuilder from './components/ResumeBuilder'
-import InterestsForm from './components/resume/InterestsForm'
 import './styles/global.css'
 import './styles/App.css'
 
@@ -18,16 +15,13 @@ function App() {
       <div className="app">
         <Navigation />
         
-        <main className="main-content">
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/upload" element={<ResumeUpload />} />
-            <Route path="/analysis" element={<ResumeAnalysis />} />
+            <Route path="/upload" element={<ResumeUpload onUpload={() => {}} />} />
             <Route path="/interview" element={<InterviewChat />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
-            <Route path="/builder/*" element={<ResumeBuilder />} />
-            <Route path="/interests" element={<InterestsForm onSave={() => {}} onCancel={() => {}} />} />
           </Routes>
         </main>
 

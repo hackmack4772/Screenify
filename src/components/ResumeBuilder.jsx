@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { resumeBuilderService } from '../services/resumeBuilderService';
+import { resumeIntegrationService } from '../services/resumeIntegrationService';
 import { toast } from 'react-toastify';
 import '../styles/ResumeBuilder.css';
 
 const ResumeBuilder = () => {
+  const navigate = useNavigate();
   const [templates, setTemplates] = useState({});
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [resume, setResume] = useState(null);
@@ -24,6 +27,7 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     loadTemplates();
+    loadExistingResume();
   }, []);
 
   const loadTemplates = async () => {
@@ -33,6 +37,14 @@ const ResumeBuilder = () => {
     } catch (error) {
       console.error('Error loading templates:', error);
       toast.error('Failed to load resume templates');
+    }
+  };
+
+  const loadExistingResume = () => {
+    const existingResume = resumeIntegrationService.getResumeData();
+    if (existingResume) {
+      const builderFormat = resumeIntegrationService.convertToBuilderFormat(existingResume);
+      setResume(builderFormat);
     }
   };
 
@@ -90,12 +102,26 @@ const ResumeBuilder = () => {
     }
   };
 
+  const saveResume = async () => {
+    try {
+      // Save to builder service
+      await resumeBuilderService.saveResume(resume);
+      
+      // Convert and save for scanner
+      const scannerFormat = resumeIntegrationService.convertToScannerFormat(resume);
+      resumeIntegrationService.saveResumeData(scannerFormat);
+      
+      toast.success('Resume saved successfully');
+    } catch (error) {
+      console.error('Error saving resume:', error);
+      toast.error('Failed to save resume');
+    }
+  };
+
   const analyzeResume = async () => {
     try {
-      const analysis = await resumeBuilderService.analyzeResume(resume);
-      setSuggestions(analysis);
-      setShowSuggestions(true);
-      toast.success('Resume analysis complete');
+      const scannerFormat = resumeIntegrationService.convertToScannerFormat(resume);
+      navigate('/analysis', { state: { resumeData: scannerFormat } });
     } catch (error) {
       console.error('Error analyzing resume:', error);
       toast.error('Failed to analyze resume');
@@ -104,14 +130,15 @@ const ResumeBuilder = () => {
 
   const exportResume = async (format) => {
     try {
-      const result = await resumeBuilderService.exportResume(resume, format);
-      if (result.success) {
-        // Handle successful export (e.g., download file)
-        toast.success(`Resume exported as ${format.toUpperCase()}`);
+      if (format === 'pdf') {
+        await resumeIntegrationService.exportToPDF(resume);
+      } else {
+        await resumeBuilderService.exportResume(resume, format);
       }
+      toast.success(`Resume exported as ${format.toUpperCase()}`);
     } catch (error) {
       console.error('Error exporting resume:', error);
-      toast.error('Failed to export resume');
+      toast.error(`Failed to export resume as ${format.toUpperCase()}`);
     }
   };
 

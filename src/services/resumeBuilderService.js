@@ -2,6 +2,8 @@ import { deepseekAPI } from './deepseekAPI';
 
 class ResumeBuilderService {
   constructor() {
+    this.storageKey = 'resume_builder_data';
+    this.isDevelopment = import.meta.env.MODE === 'development';
     this.templates = {
       softwareEngineer: {
         name: 'Software Engineer',
@@ -91,46 +93,98 @@ class ResumeBuilderService {
   }
 
   async getTemplates() {
-    return this.templates;
+    try {
+      if (this.isDevelopment) {
+        return await deepseekAPI.mockGetTemplates();
+      }
+      return await deepseekAPI.getTemplates();
+    } catch (error) {
+      console.error('Error getting templates:', error);
+      throw error;
+    }
   }
 
   async getTemplateById(templateId) {
-    return this.templates[templateId];
+    try {
+      if (this.isDevelopment) {
+        return await deepseekAPI.mockGetTemplateById(templateId);
+      }
+      return await deepseekAPI.getTemplateById(templateId);
+    } catch (error) {
+      console.error('Error getting template:', error);
+      throw error;
+    }
   }
 
   async createNewResume(templateId) {
-    const template = await this.getTemplateById(templateId);
-    return {
-      ...this.defaultResume,
-      template: templateId,
-      sections: template.sections,
-      styling: {
-        font: template.defaultFont,
-        colors: template.defaultColors
+    try {
+      const template = await this.getTemplateById(templateId);
+      if (!template) {
+        throw new Error('Template not found');
       }
-    };
+
+      return {
+        templateId,
+        sections: template.sections.map(section => ({
+          ...section,
+          enabled: section.required
+        })),
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          linkedin: '',
+          website: ''
+        },
+        education: [],
+        experience: [],
+        skills: [],
+        projects: [],
+        certifications: [],
+        languages: [],
+        interests: [],
+        customization: {
+          font: template.defaultFont,
+          colors: template.defaultColors
+        }
+      };
+    } catch (error) {
+      console.error('Error creating new resume:', error);
+      throw error;
+    }
+  }
+
+  async saveResume(resumeData) {
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(resumeData));
+      return true;
+    } catch (error) {
+      console.error('Error saving resume:', error);
+      throw error;
+    }
+  }
+
+  async loadResume() {
+    try {
+      const data = localStorage.getItem(this.storageKey);
+      return data ? JSON.parse(data) : null;
+    } catch (error) {
+      console.error('Error loading resume:', error);
+      throw error;
+    }
   }
 
   async analyzeResume(resumeData) {
-    const prompt = `
-      Analyze the following resume and provide suggestions for improvement:
-      ${JSON.stringify(resumeData, null, 2)}
-
-      Please provide:
-      1. Content completeness assessment
-      2. Missing important sections or information
-      3. Grammar and clarity improvements
-      4. Industry-specific recommendations
-      5. ATS optimization suggestions
-      6. Professional tone and language improvements
-      7. Achievement quantification opportunities
-      8. Skills presentation optimization
-      9. Formatting and layout suggestions
-      10. Keywords and buzzwords to include
-    `;
-
-    const response = await deepseekAPI.generateResponse(prompt);
-    return this.parseAnalysisResponse(response);
+    try {
+      if (this.isDevelopment) {
+        return await deepseekAPI.mockAnalyzeResume(resumeData);
+      }
+      return await deepseekAPI.analyzeResume(resumeData);
+    } catch (error) {
+      console.error('Error analyzing resume:', error);
+      throw error;
+    }
   }
 
   async generateResumeSuggestions(resumeData) {
@@ -156,13 +210,24 @@ class ResumeBuilderService {
   }
 
   async exportResume(resumeData, format) {
-    // Implementation for exporting resume in different formats
-    // This would typically involve a PDF/DOCX generation library
-    return {
-      success: true,
-      url: 'dummy-url',
-      format
-    };
+    try {
+      // For now, just download as JSON
+      const blob = new Blob([JSON.stringify(resumeData, null, 2)], {
+        type: 'application/json'
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `resume.${format}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      return { success: true };
+    } catch (error) {
+      console.error('Error exporting resume:', error);
+      throw error;
+    }
   }
 
   parseAnalysisResponse(response) {
